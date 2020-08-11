@@ -1,10 +1,8 @@
 public class Rectangle extends Shape {
-    private double width;
-    private double length;
+    private double width=1;
+    private double length=1;
 
     Rectangle(){
-    double width=1;
-    double length=1;
     }
 
     Rectangle(double width, double length){

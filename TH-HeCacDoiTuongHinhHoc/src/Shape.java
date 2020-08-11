@@ -1,10 +1,8 @@
 public class Shape {
-    private String color;
-    private boolean filled;
+    private String color = "green";
+    private boolean filled = true;
 
     Shape() {
-        String color = "green";
-        boolean filled = true;
     }
 
     Shape(String color, boolean filled) {
