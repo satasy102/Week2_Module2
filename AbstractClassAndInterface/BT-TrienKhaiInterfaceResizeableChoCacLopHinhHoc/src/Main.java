@@ -5,21 +5,33 @@ public class Main {
         shapes[1]=new Rectangle(1.7,2.5);
         shapes[2]=new Square(2.2);
 
-        Circle c=(Circle)shapes[0];
-        Rectangle r=(Rectangle)shapes[1];
-        Square s=(Square)shapes[2];
-
         System.out.println("Chua resize:");
-        System.out.println(c);
-        System.out.println(r);
-        System.out.println(s);
+        for (Shape shape : shapes) {
+            if (shape instanceof Circle) {
+                Circle c = (Circle) shape;
+                System.out.println(c);
+            }
+            if (shape instanceof Rectangle) {
+                Rectangle r = (Rectangle) shape;
+                System.out.println(r);
+            }
+
+        }
 
         double persent= Math.random()*99+1;
 
         System.out.println("Da resize:"+persent+"%");
-        c.resize(persent);
-        r.resize(persent);
-        s.resize(persent);
+
+        for (Shape shape : shapes) {
+            if (shape instanceof Circle) {
+                Circle c = (Circle) shape;
+                c.resize(persent);
+            }
+            if (shape instanceof Rectangle) {
+                Rectangle r = (Rectangle) shape;
+                r.resize(persent);
+            }
+        }
 
     }
 }
