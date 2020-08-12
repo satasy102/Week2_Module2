@@ -1,13 +1,13 @@
 public class Square extends Rectangle {
-    Square(){
+    Square() {
     }
 
-    Square(double side){
-        super(side,side);
+    Square(double side) {
+        super(side, side);
     }
 
-    Square(double side, String color, boolean filled){
-        super(side,side,color,filled);
+    Square(double side, String color, boolean filled) {
+        super(side, side, color, filled);
     }
 
     public double getSide() {
@@ -31,10 +31,9 @@ public class Square extends Rectangle {
 
     @Override
     public String toString() {
-        return "A Square with side= "
-                + getSide()
-                + ", which is a subclass of "
-                + super.toString();
+        return "A Square with side= " + getSide() +
+                ", Area " + getArea() +
+                ", which is a subclass of " + super.toString();
     }
 }
 
