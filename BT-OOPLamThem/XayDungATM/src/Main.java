@@ -90,6 +90,8 @@ public class Main {
                 stt++;
             }
         }
+        System.out.println("Bam nut theo menu de tiep tuc giao dich");
+        System.out.println("===========================================");
 
     }
 
