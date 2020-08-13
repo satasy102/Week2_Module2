@@ -4,12 +4,8 @@ public class Main {
     public static void main(String[] args) {
         ATM atm = new ATM("Nguyen Van A", 1200000);
         System.out.printf("Ngan hang ABC kinh chao Quy khach %s \n", atm.getTenTK());
-        System.out.println("Menu:");
-        System.out.println("1. Nhan phim A de kiem tra tai khoan");
-        System.out.println("2. Nhan phim D de nap tien");
-        System.out.println("3. Nhan phim W de rut tien");
-        System.out.println("4. Nhan phim H de xem lich su 3 lan rut tien");
-        System.out.println("5. Nhan phim X de thoat");
+
+        menu();
 
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
@@ -34,15 +30,19 @@ public class Main {
                 default:
                     System.out.println("Thông báo sai dữ liệu. Moi nhap lai:");
             }
-            System.out.println("Menu:");
-            System.out.println("1. Nhan phim A de kiem tra tai khoan");
-            System.out.println("2. Nhan phim D de nap tien");
-            System.out.println("3. Nhan phim W de rut tien");
-            System.out.println("4. Nhan phim H de xem lich su 3 lan rut tien");
-            System.out.println("5. Nhan phim X de thoat");
+            menu();
             input = sc.nextLine();
         }
         System.out.println("Cảm ơn bạn đã sử dụng dịch vụ ATM");
+    }
+
+    public static void menu(){
+        System.out.println("Menu:");
+        System.out.println("1. Nhan phim A de kiem tra tai khoan");
+        System.out.println("2. Nhan phim D de nap tien");
+        System.out.println("3. Nhan phim W de rut tien");
+        System.out.println("4. Nhan phim H de xem lich su 3 lan rut tien");
+        System.out.println("5. Nhan phim X de thoat");
     }
 
     public static void kiemTraTaiKhoan(ATM atm) {
