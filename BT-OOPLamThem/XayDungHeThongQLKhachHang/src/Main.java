@@ -7,7 +7,6 @@ public class Main {
 
         ArrayList<KhachHang> arrKhachHang = new ArrayList<>();
 
-        Scanner sc = new Scanner(System.in);
         System.out.println("Chao mung ban den voi he thong quan ly khach hang");
         menu();
 
@@ -16,27 +15,16 @@ public class Main {
 
         while (true) {
             switch (input) {
-                case 1:
-                    nhapThongTinKhachHang(arrKhachHang);
-                    break;
-                case 2:
-                    timKiemKhachHang(arrKhachHang);
-                    break;
-                case 3:
-                    inThongTinKhachHang(arrKhachHang);
-                    break;
-                case 4:
-                    hienThiDanhSachKhachHang(arrKhachHang);
-                    break;
-                case 5:
-                    tangSoDonHangChoKhach(arrKhachHang);
-                    break;
-                case 0:
+                case 1 -> nhapThongTinKhachHang(arrKhachHang);
+                case 2 -> timKiemKhachHang(arrKhachHang);
+                case 3 -> inThongTinKhachHang(arrKhachHang);
+                case 4 -> hienThiDanhSachKhachHang(arrKhachHang);
+                case 5 -> tangSoDonHangChoKhach(arrKhachHang);
+                case 0 -> {
                     System.out.println("He thong Quan ly khach hang vua shutdown.");
                     System.exit(0);
-                    break;
-                default:
-                    System.out.println("Nhap sai du lieu. Moi nhap lai:");
+                }
+                default -> System.out.println("Nhap sai du lieu. Moi nhap lai:");
             }
             menu();
             input= (int) checkNumber(input);
@@ -179,7 +167,7 @@ public class Main {
 
     public static long checkNumber(long num) {
         Scanner sc = new Scanner(System.in);
-        String str = null;
+        String str;
         while (true) {
             try {
                 str = sc.nextLine();
@@ -191,6 +179,5 @@ public class Main {
         }
         return num;
     }
-
-
+    
 }

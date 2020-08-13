@@ -11,12 +11,20 @@ public class KhachHang {
     public KhachHang() {
     }
 
-    public KhachHang(String tenKH, String diaChi, long soDienThoai, String email, String gioiTinh) {
-        this.tenKH = tenKH;
-        this.diaChi = diaChi;
-        this.soDienThoai = soDienThoai;
-        this.email = email;
-        this.gioiTinh = gioiTinh;
+    public static String checkInput(String input) {
+        Scanner sc = new Scanner(System.in);
+        while (input.equals("")) {
+            System.out.println("Khong duoc bo trong. Nhap lai:");
+            input = sc.nextLine();
+            input = chuanHoa(input);
+        }
+        return input;
+    }
+
+    public static String chuanHoa(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+", " ");
+        return str;
     }
 
     public String getTenKH() {
@@ -73,17 +81,17 @@ public class KhachHang {
 
         System.out.println("Nhap ten KH:");
         tenKH = sc.nextLine();
-        tenKH=chuanHoa(tenKH);
-        tenKH=checkInput(tenKH);
+        tenKH = chuanHoa(tenKH);
+        tenKH = checkInput(tenKH);
         System.out.println("Nhap dia chi KH:");
         diaChi = sc.nextLine();
-        diaChi=chuanHoa(diaChi);
+        diaChi = chuanHoa(diaChi);
         System.out.println("Nhap So Dien Thoai KH:");
         soDienThoai = 0;
         soDienThoai = checkNumber(soDienThoai);
         System.out.println("Nhap Email KH:");
         email = sc.nextLine();
-        email=email.trim();
+        email = email.trim();
         System.out.println("Nhap gioi tinh KH:");
         gioiTinh = sc.nextLine();
     }
@@ -98,7 +106,7 @@ public class KhachHang {
 
     public long checkNumber(long num) {
         Scanner sc = new Scanner(System.in);
-        String str = null;
+        String str;
         while (true) {
             try {
                 str = sc.nextLine();
@@ -109,21 +117,5 @@ public class KhachHang {
             }
         }
         return num;
-    }
-
-    public static String checkInput(String input){
-        Scanner sc = new Scanner(System.in);
-        while (input.equals("")){
-            System.out.println("Khong duoc bo trong. Nhap lai:");
-            input= sc.nextLine();
-            input= chuanHoa(input);
-        }
-        return input;
-    }
-
-    public static String chuanHoa(String str) {
-        str = str.trim();
-        str = str.replaceAll("\\s+", " ");
-        return str;
     }
 }
