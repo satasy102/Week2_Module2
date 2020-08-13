@@ -1,7 +1,7 @@
 public class ATM {
     private String tenTK;
     private long soDuTK;
-    private String[] lichSuGD=new String[1000];
+    private String[] lichSuGD=new String[700000000];
     int i=0;
 
     public ATM(String tenTK, long soDuTK) {

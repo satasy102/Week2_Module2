@@ -52,7 +52,6 @@ public class Main {
     }
 
     public static void napTien(ATM atm) {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Vui long nhap so tien:");
         long tienNap = 0;
         tienNap = checkNumber(tienNap);
@@ -65,7 +64,6 @@ public class Main {
     }
 
     public static void rutTien(ATM atm) {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Vui long nhap so tien:");
         long tienRut = 0;
         tienRut = checkNumber(tienRut);
