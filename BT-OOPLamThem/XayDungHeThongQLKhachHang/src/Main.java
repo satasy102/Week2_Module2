@@ -82,10 +82,8 @@ public class Main {
     }
 
     public static void timKiemKhachHang(ArrayList<KhachHang> arrKhachHang) {
-        Scanner sc = new Scanner(System.in);
         int index = 0;
         boolean check = false;
-
 
         System.out.println("Nhap sdt khach hang:");
         long sdt = 0;
@@ -113,7 +111,6 @@ public class Main {
     }
 
     public static void inThongTinKhachHang(ArrayList<KhachHang> arrKhachHang) {
-        Scanner sc = new Scanner(System.in);
         int index = 0;
         boolean check = false;
 
@@ -153,7 +150,6 @@ public class Main {
     }
 
     public static void tangSoDonHangChoKhach(ArrayList<KhachHang> arrKhachHang){
-        Scanner sc = new Scanner(System.in);
         int index = 0;
         boolean check = false;
 
@@ -195,4 +191,6 @@ public class Main {
         }
         return num;
     }
+
+
 }

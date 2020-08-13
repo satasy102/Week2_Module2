@@ -73,13 +73,17 @@ public class KhachHang {
 
         System.out.println("Nhap ten KH:");
         tenKH = sc.nextLine();
+        tenKH=chuanHoa(tenKH);
+        tenKH=checkInput(tenKH);
         System.out.println("Nhap dia chi KH:");
         diaChi = sc.nextLine();
+        diaChi=chuanHoa(diaChi);
         System.out.println("Nhap So Dien Thoai KH:");
         soDienThoai = 0;
         soDienThoai = checkNumber(soDienThoai);
         System.out.println("Nhap Email KH:");
         email = sc.nextLine();
+        email=email.trim();
         System.out.println("Nhap gioi tinh KH:");
         gioiTinh = sc.nextLine();
     }
@@ -105,5 +109,21 @@ public class KhachHang {
             }
         }
         return num;
+    }
+
+    public static String checkInput(String input){
+        Scanner sc = new Scanner(System.in);
+        while (input.equals("")){
+            System.out.println("Khong duoc bo trong. Nhap lai:");
+            input= sc.nextLine();
+            input= chuanHoa(input);
+        }
+        return input;
+    }
+
+    public static String chuanHoa(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+", " ");
+        return str;
     }
 }
