@@ -5,26 +5,10 @@ public class KhachHang {
     private String diaChi;
     private long soDienThoai;
     private String email;
-    private String gioiTinh;
+    private boolean gioiTinh;
     private int soDonHangDaMua;
 
     public KhachHang() {
-    }
-
-    public static String checkInput(String input) {
-        Scanner sc = new Scanner(System.in);
-        while (input.equals("")) {
-            System.out.println("Khong duoc bo trong. Nhap lai:");
-            input = sc.nextLine();
-            input = chuanHoa(input);
-        }
-        return input;
-    }
-
-    public static String chuanHoa(String str) {
-        str = str.trim();
-        str = str.replaceAll("\\s+", " ");
-        return str;
     }
 
     public String getTenKH() {
@@ -60,11 +44,13 @@ public class KhachHang {
     }
 
     public String getGioiTinh() {
-        return gioiTinh;
+        if(gioiTinh) return "Nam";
+        else return "Nu";
     }
 
-    public void setGioiTinh(String gioiTinh) {
-        this.gioiTinh = gioiTinh;
+    public void setGioiTinh(String gender) {
+        gender = gender.toLowerCase();
+        this.gioiTinh = gender.equals("nam");
     }
 
     public int getSoDonHangDaMua() {
@@ -78,33 +64,48 @@ public class KhachHang {
 
     public void nhapThongTinKH() {
         Scanner sc = new Scanner(System.in);
+        String gender = "nu";
 
         System.out.println("Nhap ten KH:");
         tenKH = sc.nextLine();
         tenKH = chuanHoa(tenKH);
-        tenKH = checkInput(tenKH);
+        tenKH = kiemTraChuoi(tenKH);
         System.out.println("Nhap dia chi KH:");
         diaChi = sc.nextLine();
         diaChi = chuanHoa(diaChi);
         System.out.println("Nhap So Dien Thoai KH:");
         soDienThoai = 0;
-        soDienThoai = checkNumber(soDienThoai);
+        soDienThoai = kiemTraSo(soDienThoai);
         System.out.println("Nhap Email KH:");
         email = sc.nextLine();
         email = email.trim();
         System.out.println("Nhap gioi tinh KH:");
-        gioiTinh = sc.nextLine();
+        gender = sc.nextLine();
+        gender= kiemTraChuoi(gender);
+        gender = checkGioiTinh(gender);
+        setGioiTinh(gender);
+
+    }
+
+    public String checkGioiTinh(String str) {
+        Scanner sc = new Scanner(System.in);
+        str = str.toLowerCase();
+        while (!str.equals("nam") && !str.equals("nu")) {
+            System.out.println("Gioi tinh la Nam hoac Nu. Nhap lai:");
+            str = sc.nextLine();
+        }
+        return str;
     }
 
     public void hienThiThongTinKH() {
-        System.out.println("Ho va ten:" + tenKH);
-        System.out.println("Dia chi:" + diaChi);
-        System.out.println("So dien thoai:" + soDienThoai);
-        System.out.println("Email:" + email);
-        System.out.println("Gioi tinh:" + gioiTinh);
+        System.out.println("Ho va ten:" + getTenKH());
+        System.out.println("Dia chi:" + getDiaChi());
+        System.out.println("So dien thoai:" + getSoDienThoai());
+        System.out.println("Email:" + getEmail());
+        System.out.println("Gioi tinh:" + getGioiTinh());
     }
 
-    public long checkNumber(long num) {
+    public long kiemTraSo(long num) {
         Scanner sc = new Scanner(System.in);
         String str;
         while (true) {
@@ -117,5 +118,22 @@ public class KhachHang {
             }
         }
         return num;
+    }
+
+    public static String kiemTraChuoi(String input) {
+        Scanner sc = new Scanner(System.in);
+        input=input.trim();
+        while (input.equals("")) {
+            System.out.println("Khong duoc bo trong. Nhap lai:");
+            input = sc.nextLine();
+            input = chuanHoa(input);
+        }
+        return input;
+    }
+
+    public static String chuanHoa(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+", " ");
+        return str;
     }
 }
