@@ -10,7 +10,7 @@ public class MayATM {
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
 
-        while (input != "X") {
+        while (true) {
             switch (input) {
                 case "A" -> taiKhoan.kiemTraTaiKhoan();
                 case "D" -> taiKhoan.napTien();
@@ -25,7 +25,6 @@ public class MayATM {
             menu();
             input = sc.nextLine();
         }
-        System.out.println("Cảm ơn bạn đã sử dụng dịch vụ ATM");
     }
 
     public static void menu() {
@@ -40,7 +39,7 @@ public class MayATM {
     public static void rutTien(TaiKhoan taiKhoan){
         System.out.println("Nhap tien rut");
         long tienRut = 0;
-        tienRut = taiKhoan.checkNumber(tienRut);
+        tienRut = taiKhoan.kiemTraSo(tienRut);
         if (taiKhoan.rutTien(tienRut)) {
             System.out.println("Rut thanh cong " + tienRut + " VND");
             taiKhoan.kiemTraTaiKhoan();

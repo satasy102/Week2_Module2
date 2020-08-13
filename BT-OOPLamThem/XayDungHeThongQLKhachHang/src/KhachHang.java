@@ -64,7 +64,7 @@ public class KhachHang {
 
     public void nhapThongTinKH() {
         Scanner sc = new Scanner(System.in);
-        String gender = "nu";
+        String gender;
 
         System.out.println("Nhap ten KH:");
         tenKH = sc.nextLine();

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class TaiKhoan {
-    int i = 0;
+    private  int i = 0;
     private String tenTK;
     private long soDuTK;
     private String[] lichSuGD = new String[700000000];
@@ -26,7 +26,7 @@ public class TaiKhoan {
     public long nhapTienNap() {
         System.out.println("Vui long nhap so tien can nap:");
         long tienNap = 0;
-        tienNap = checkNumber(tienNap);
+        tienNap = kiemTraSo(tienNap);
         return tienNap;
     }
 
@@ -70,9 +70,9 @@ public class TaiKhoan {
 
     }
 
-    public long checkNumber(long num) {
+    public long kiemTraSo(long num) {
         Scanner sc = new Scanner(System.in);
-        String str = null;
+        String str;
         while (true) {
             try {
                 str = sc.nextLine();
