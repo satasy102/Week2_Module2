@@ -12,23 +12,15 @@ public class Main {
 
         while (input != "X") {
             switch (input) {
-                case "A":
-                    kiemTraTaiKhoan(atm);
-                    break;
-                case "D":
-                    napTien(atm);
-                    break;
-                case "W":
-                    rutTien(atm);
-                    break;
-                case "H":
-                    lichSuGiaoDich(atm);
-                    break;
-                case "X":
+                case "A" -> kiemTraTaiKhoan(atm);
+                case "D" -> napTien(atm);
+                case "W" -> rutTien(atm);
+                case "H" -> lichSuGiaoDich(atm);
+                case "X" -> {
                     System.out.println("Cam on ban da su dung dich vu ATM");
                     System.exit(0);
-                default:
-                    System.out.println("Thông báo sai dữ liệu. Moi nhap lai:");
+                }
+                default -> System.out.println("Thông báo sai dữ liệu. Moi nhap lai:");
             }
             menu();
             input = sc.nextLine();
