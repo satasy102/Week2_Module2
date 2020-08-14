@@ -114,11 +114,12 @@ public class UngDungQuanLyKhachHang {
         boolean check = false;
 
         System.out.println("Nhap sdt khach hang:");
-        long sdt = 0;
-        sdt= kiemTraSo(sdt);
+        long sdtNhap = 0;
+        sdtNhap= kiemTraSo(sdtNhap);
 
         for (int i = 0; i < mangKhachHang.size(); i++) {
-            if (mangKhachHang.get(i).getSoDienThoai()==sdt) {
+            long soDienThoai = mangKhachHang.get(i).getSoDienThoai();
+            if (soDienThoai ==sdtNhap) {
                 check = true;
                 index=i;
                 break;
@@ -137,13 +138,14 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static void hienThiDanhSachKhachHang(ArrayList<KhachHang> mangKhachHang) {
-        for (int i = 0; i < mangKhachHang.size(); i++) {
+        int size = mangKhachHang.size();
+        for (int i = 0; i < size; i++) {
             int soThuTu = i + 1;
             System.out.print( soThuTu +". ");
             thongTinKhachHang(mangKhachHang,i);
             System.out.println();
         }
-        System.out.printf("Tong co %d Khach hang trong he thong\n", mangKhachHang.size());
+        System.out.printf("Tong co %d Khach hang trong he thong\n", size);
         phanDay();
     }
 
@@ -152,11 +154,12 @@ public class UngDungQuanLyKhachHang {
         boolean check = false;
 
         System.out.println("Nhap sdt khach hang:");
-        long sdt = 0;
-        sdt= kiemTraSo(sdt);
+        long sdtNhap = 0;
+        sdtNhap= kiemTraSo(sdtNhap);
 
         for (int i = 0; i < mangKhachHang.size(); i++) {
-            if (mangKhachHang.get(i).getSoDienThoai()==sdt) {
+            long soDienThoai = mangKhachHang.get(i).getSoDienThoai();
+            if (soDienThoai ==sdtNhap) {
                 check = true;
                 index=i;
                 break;
