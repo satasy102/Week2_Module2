@@ -147,11 +147,6 @@ public class UngDungQuanLyKhachHang {
 
     }
 
-    public static void phanDay() {
-        System.out.println("Chon menu de thuc hien tiep");
-        System.out.println(DAU_CHIA_DONG);
-    }
-
     public static void hienThiDanhSachKhachHang(ArrayList<KhachHang> mangKhachHang) {
         for (int i = 0; i < mangKhachHang.size(); i++) {
             System.out.print( (i+1)+". ");
@@ -202,6 +197,11 @@ public class UngDungQuanLyKhachHang {
         return gender.equals("nam");
     }
 
+    public static void phanDay() {
+        System.out.println("Chon menu de thuc hien tiep");
+        System.out.println(DAU_CHIA_DONG);
+    }
+    
     public static long kiemTraSo(long num) {
         Scanner sc = new Scanner(System.in);
         String str;
@@ -233,5 +233,4 @@ public class UngDungQuanLyKhachHang {
         str = str.replaceAll("\\s+", " ");
         return str;
     }
-    
 }
