@@ -15,7 +15,7 @@ public class UngDungQuanLyKhachHang {
 
         while (true) {
             switch (input) {
-                case 1 -> nhapThongTinKhachHang(mangKhachHang);
+                case 1 -> capnhapThongTinKhachHang(mangKhachHang);
                 case 2 -> timKiemKhachHang(mangKhachHang);
                 case 3 -> inThongTinKhachHang(mangKhachHang);
                 case 4 -> hienThiDanhSachKhachHang(mangKhachHang);
@@ -26,7 +26,7 @@ public class UngDungQuanLyKhachHang {
                 }
                 default -> System.out.println("Nhap sai du lieu. Moi nhap lai:");
             }
-            menu();
+            System.out.println("Nhap lua chon:");
             input= (int) kiemTraSo(input);
         }
     }
@@ -40,9 +40,32 @@ public class UngDungQuanLyKhachHang {
         System.out.println("Bam 0 de thoat");
     }
 
-    public static void nhapThongTinKhachHang(ArrayList<KhachHang> mangKhachHang) {
-        KhachHang khachHang = new KhachHang();
-        khachHang.nhapThongTinKH();
+    public static KhachHang nhapThongTinKH() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Nhap ten KH:");
+        String tenKH = sc.nextLine();
+        tenKH = chuanHoa(tenKH);
+        tenKH = kiemTraChuoi(tenKH);
+        System.out.println("Nhap dia chi KH:");
+        String diaChi = sc.nextLine();
+        diaChi = chuanHoa(diaChi);
+        System.out.println("Nhap So Dien Thoai KH:");
+        long soDienThoai = 0;
+        soDienThoai = kiemTraSo(soDienThoai);
+        System.out.println("Nhap Email KH:");
+        String email = sc.nextLine();
+        email = email.trim();
+        System.out.println("Nhap gioi tinh KH:");
+        String gender = sc.nextLine();
+        gender= kiemTraChuoi(gender);
+        boolean gioiTinh = chuyenGioiTinhSangBoolean(gender);
+
+        return new KhachHang(tenKH,diaChi,soDienThoai,email,gioiTinh);
+    }
+
+    public static void capnhapThongTinKhachHang(ArrayList<KhachHang> mangKhachHang) {
+        KhachHang khachHang=nhapThongTinKH();
 
         boolean check = false;
         int index = 0;
@@ -72,18 +95,17 @@ public class UngDungQuanLyKhachHang {
         System.out.printf("Khach hang %s, Dia chi: %s, Email: %s, SDT: %s, Gioi tinh: %s, So don hang da mua: %d\n",
                 mangKhachHang.get(index).getTenKH(), mangKhachHang.get(index).getDiaChi(),
                 mangKhachHang.get(index).getEmail(), mangKhachHang.get(index).getSoDienThoai(),
-                mangKhachHang.get(index).getGioiTinh(),mangKhachHang.get(index).getSoDonHangDaMua());
+                gioiTinh(mangKhachHang,index),mangKhachHang.get(index).getSoDonHangDaMua());
     }
 
     public static void timKiemKhachHang(ArrayList<KhachHang> mangKhachHang) {
+        System.out.println("He thong dang tim kiem");
         int index = 0;
         boolean check = false;
 
         System.out.println("Nhap sdt khach hang:");
         long sdt = 0;
         sdt= kiemTraSo(sdt);
-        System.out.println("He thong dang tim kiem");
-        System.out.println("Ket qua:");
 
         for (int i = 0; i < mangKhachHang.size(); i++) {
             if (mangKhachHang.get(i).getSoDienThoai()==sdt) {
@@ -102,13 +124,14 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static void inThongTinKhachHang(ArrayList<KhachHang> mangKhachHang) {
+        System.out.println("Thong tin");
+
         int index = 0;
         boolean check = false;
 
         System.out.println("Nhap sdt khach hang:");
         long sdt = 0;
         sdt= kiemTraSo(sdt);
-        System.out.println("Thong tin");
 
         for (int i = 0; i < mangKhachHang.size(); i++) {
             if (mangKhachHang.get(i).getSoDienThoai()==sdt) {
@@ -129,8 +152,8 @@ public class UngDungQuanLyKhachHang {
     public static void hienThiDanhSachKhachHang(ArrayList<KhachHang> mangKhachHang) {
         for (int i = 0; i < mangKhachHang.size(); i++) {
             System.out.print( (i+1)+". ");
-            mangKhachHang.get(i).hienThiThongTinKH();
-            System.out.println("==========================================");
+            thongTinKhachHang(mangKhachHang,i);
+            System.out.println("==================");
         }
         System.out.printf("Tong co %d Khach hang trong he thong\n", mangKhachHang.size());
         System.out.println("Chon menu de thuc hien tiep");
@@ -162,6 +185,22 @@ public class UngDungQuanLyKhachHang {
         System.out.println("==========================================");
     }
 
+    public static String gioiTinh(ArrayList<KhachHang> mangKhachHang, int index){
+        if(mangKhachHang.get(index).getGioiTinh()) return "Nam";
+        else return "Nu";
+    }
+
+    public static boolean chuyenGioiTinhSangBoolean(String gender){
+        Scanner sc = new Scanner(System.in);
+        gender = gender.toLowerCase();
+        while (!gender.equals("nam") && !gender.equals("nu")) {
+            System.out.println("Gioi tinh la Nam hoac Nu. Nhap lai:");
+            gender = sc.nextLine();
+        }
+
+        return gender.equals("nam");
+    }
+
     public static long kiemTraSo(long num) {
         Scanner sc = new Scanner(System.in);
         String str;
@@ -175,6 +214,23 @@ public class UngDungQuanLyKhachHang {
             }
         }
         return num;
+    }
+
+    public static String kiemTraChuoi(String input) {
+        Scanner sc = new Scanner(System.in);
+        input=input.trim();
+        while (input.equals("")) {
+            System.out.println("Khong duoc bo trong. Nhap lai:");
+            input = sc.nextLine();
+            input = chuanHoa(input);
+        }
+        return input;
+    }
+
+    public static String chuanHoa(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+", " ");
+        return str;
     }
     
 }
