@@ -12,6 +12,7 @@ public class UngDungQuanLyKhachHang {
     public static final String THOAT = "Bam 0 de thoat";
     private static final ArrayList<KhachHang> mangKhachHang = new ArrayList<>();
     private static final Scanner sc=new Scanner(System.in);
+    public static final String KHONG_TON_TAI_KH = "Khong ton tai KH";
     private static int index;
 
     public static void main(String[] args) {
@@ -72,10 +73,12 @@ public class UngDungQuanLyKhachHang {
         KhachHang khachHang= new KhachHang(tenKH, diaChi, soDienThoai, email, gioiTinh);
 
         if(kiemTraSDTVaEmailTrungNhau(soDienThoai,email)){
+
             mangKhachHang.get(index).setTenKH(tenKH);
             mangKhachHang.get(index).setDiaChi(diaChi);
             mangKhachHang.get(index).setGioiTinh(gioiTinh);
             System.out.println("Khach hang nay da ton tai. He thong da cap nhat thong tin.");
+
         } else {
             mangKhachHang.add(khachHang);
             System.out.printf("Ban vua them khach hang %s thanh cong.", tenKH);
@@ -83,9 +86,13 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static boolean kiemTraSDTVaEmailTrungNhau(String soDienThoai, String email){
-        for (int i=0;i<mangKhachHang.size();i++) {
+        int size = mangKhachHang.size();
+
+        for (int i = 0; i< size; i++) {
+
             String soDienThoaiCu = mangKhachHang.get(i).getSoDienThoai();
             String eMailCu = mangKhachHang.get(i).getEmail();
+
             if(soDienThoaiCu.equals(soDienThoai) && eMailCu.equals(email)){
                 index=i;
                 return true;
@@ -94,9 +101,10 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static void thongTinKhachHang(int index) {
+        String thongTin = mangKhachHang.get(index).toString();
+        int soDonHangDaMua = mangKhachHang.get(index).getSoDonHangDaMua();
         System.out.printf("%s, Gioi tinh: %s, So don hang da mua: %d\n",
-                mangKhachHang.get(index).toString(), gioiTinh(index),
-                mangKhachHang.get(index).getSoDonHangDaMua());
+                thongTin, gioiTinh(index), soDonHangDaMua);
     }
 
     public static boolean timKiemSDT(){
@@ -106,6 +114,7 @@ public class UngDungQuanLyKhachHang {
         int size = mangKhachHang.size();
         for (int i = 0; i < size; i++) {
             String soDienThoai = mangKhachHang.get(i).getSoDienThoai();
+
             if (soDienThoai.equals(sdtNhap)) {
                 index = i;
                 return true;
@@ -116,7 +125,7 @@ public class UngDungQuanLyKhachHang {
     public static void timKiemKhachHang() {
         if (timKiemSDT()) {
             thongTinKhachHang(index);
-        } else System.out.println("Khong ton tai KH");
+        } else System.out.println(KHONG_TON_TAI_KH);
         phanDay();
     }
 
@@ -127,6 +136,7 @@ public class UngDungQuanLyKhachHang {
 
     public static void hienThiDanhSachKhachHang() {
         int size = mangKhachHang.size();
+        
         for (int i = 0; i < size; i++) {
             int soThuTu = i + 1;
             System.out.print(soThuTu + ". ");
@@ -140,14 +150,18 @@ public class UngDungQuanLyKhachHang {
     public static void tangSoDonHangChoKhach() {
        if (timKiemSDT()) {
             System.out.println("Thong tin sau khi tang 1 don hang");
-            mangKhachHang.get(index).setSoDonHangDaMua(mangKhachHang.get(index).getSoDonHangDaMua() + 1);
-            thongTinKhachHang(index);
-        } else System.out.println("Khong ton tai KH");
+
+           int soDonHangDaMua = mangKhachHang.get(index).getSoDonHangDaMua();
+           mangKhachHang.get(index).setSoDonHangDaMua(soDonHangDaMua + 1);
+
+           thongTinKhachHang(index);
+        } else System.out.println(KHONG_TON_TAI_KH);
         phanDay();
     }
 
     public static String gioiTinh(int index) {
-        if (mangKhachHang.get(index).getGioiTinh()) return "Nam";
+        boolean gioiTinh = mangKhachHang.get(index).getGioiTinh();
+        if (gioiTinh) return "Nam";
         else return "Nu";
     }
 
