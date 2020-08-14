@@ -16,7 +16,7 @@ public class UngDungQuanLyKhachHang {
     private static int index;
 
     public static void main(String[] args) {
-        System.out.println("Chao mung ban den voi he thong quan ly khach hang");
+        println("Chao mung ban den voi he thong quan ly khach hang");
         menu();
 
         int input = 0;
@@ -30,42 +30,50 @@ public class UngDungQuanLyKhachHang {
                 case 4 -> hienThiDanhSachKhachHang();
                 case 5 -> tangSoDonHangChoKhach();
                 case 0 -> {
-                    System.out.println("He thong Quan ly khach hang vua shutdown.");
+                    println("He thong Quan ly khach hang vua shutdown.");
                     System.exit(0);
                 }
-                default -> System.out.println("Nhap sai du lieu. Moi nhap lai:");
+                default -> println("Nhap sai du lieu. Moi nhap lai:");
             }
-            System.out.println("Nhap lua chon:");
+            println("Nhap lua chon:");
             input = (int) kiemTraSo(input);
         }
     }
 
+    public static void println(String msg) {
+        System.out.println(msg);
+    }
+
+    public static void print(String msg){
+        System.out.print(msg);
+    }
+
     public static void menu() {
-        System.out.println(NHAP_THONG_TIN_KHACH_HANG);
-        System.out.println(TIM_KIEM_KHACH_HANG);
-        System.out.println(IN_THONG_KHACH_HANG);
-        System.out.println(IN_TOAN_BO_DANH_SACH_KHACH_HANG);
-        System.out.println(TANG_SO_DON_HANG_CHO_KHACH);
-        System.out.println(THOAT);
+        println(NHAP_THONG_TIN_KHACH_HANG);
+        println(TIM_KIEM_KHACH_HANG);
+        println(IN_THONG_KHACH_HANG);
+        println(IN_TOAN_BO_DANH_SACH_KHACH_HANG);
+        println(TANG_SO_DON_HANG_CHO_KHACH);
+        println(THOAT);
     }
 
     public static void nhapThongTinKH() {
 
-        System.out.println("Nhap ten KH:");
+        println("Nhap ten KH:");
         String tenKH = sc.nextLine();
         tenKH = chuanHoa(tenKH);
         tenKH = kiemTraChuoi(tenKH);
 
-        System.out.println("Nhap dia chi KH:");
+        println("Nhap dia chi KH:");
         String diaChi = sc.nextLine();
 
-        System.out.println("Nhap So Dien Thoai KH:");
+        println("Nhap So Dien Thoai KH:");
         String soDienThoai = sc.nextLine();
 
-        System.out.println("Nhap Email KH:");
+        println("Nhap Email KH:");
         String email = sc.nextLine();
 
-        System.out.println("Nhap gioi tinh KH:");
+        println("Nhap gioi tinh KH:");
         String gender = sc.nextLine();
         gender = kiemTraChuoi(gender);
         boolean gioiTinh = chuyenGioiTinhSangBoolean(gender);
@@ -77,7 +85,7 @@ public class UngDungQuanLyKhachHang {
             mangKhachHang.get(index).setTenKH(tenKH);
             mangKhachHang.get(index).setDiaChi(diaChi);
             mangKhachHang.get(index).setGioiTinh(gioiTinh);
-            System.out.println("Khach hang nay da ton tai. He thong da cap nhat thong tin.");
+            println("Khach hang nay da ton tai. He thong da cap nhat thong tin.");
 
         } else {
             mangKhachHang.add(khachHang);
@@ -108,7 +116,7 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static boolean timKiemSDT(){
-        System.out.println("Nhap sdt khach hang:");
+        println("Nhap sdt khach hang:");
         String sdtNhap = sc.nextLine();
 
         int size = mangKhachHang.size();
@@ -125,23 +133,23 @@ public class UngDungQuanLyKhachHang {
     public static void timKiemKhachHang() {
         if (timKiemSDT()) {
             thongTinKhachHang(index);
-        } else System.out.println(KHONG_TON_TAI_KH);
+        } else println(KHONG_TON_TAI_KH);
         phanDay();
     }
 
     public static void inThongTinKhachHang() {
-        System.out.println("Thong tin");
+        println("Thong tin");
         timKiemKhachHang();
     }
 
     public static void hienThiDanhSachKhachHang() {
         int size = mangKhachHang.size();
-        
+
         for (int i = 0; i < size; i++) {
             int soThuTu = i + 1;
-            System.out.print(soThuTu + ". ");
+            print(soThuTu + ". ");
             thongTinKhachHang(i);
-            System.out.println();
+            println(" ");
         }
         System.out.printf("Tong co %d Khach hang trong he thong\n", size);
         phanDay();
@@ -149,27 +157,27 @@ public class UngDungQuanLyKhachHang {
 
     public static void tangSoDonHangChoKhach() {
        if (timKiemSDT()) {
-            System.out.println("Thong tin sau khi tang 1 don hang");
+           println("Thong tin sau khi tang 1 don hang");
 
            int soDonHangDaMua = mangKhachHang.get(index).getSoDonHangDaMua();
            mangKhachHang.get(index).setSoDonHangDaMua(soDonHangDaMua + 1);
 
            thongTinKhachHang(index);
-        } else System.out.println(KHONG_TON_TAI_KH);
+        } else println(KHONG_TON_TAI_KH);
         phanDay();
     }
 
     public static String gioiTinh(int index) {
         boolean gioiTinh = mangKhachHang.get(index).getGioiTinh();
         if (gioiTinh) return "Nam";
-        else return "Nu";
+        return "Nu";
     }
 
     public static boolean chuyenGioiTinhSangBoolean(String gender) {
         Scanner sc = new Scanner(System.in);
         gender = gender.toLowerCase();
         while (!gender.equals("nam") && !gender.equals("nu")) {
-            System.out.println("Gioi tinh la Nam hoac Nu. Nhap lai:");
+            println("Gioi tinh la Nam hoac Nu. Nhap lai:");
             gender = sc.nextLine();
         }
 
@@ -177,8 +185,8 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static void phanDay() {
-        System.out.println("Chon menu de thuc hien tiep");
-        System.out.println(DAU_CHIA_DONG);
+        println("Chon menu de thuc hien tiep");
+        println(DAU_CHIA_DONG);
     }
 
     public static long kiemTraSo(long num) {
@@ -190,7 +198,7 @@ public class UngDungQuanLyKhachHang {
                 num = Long.parseLong(str);
                 break;
             } catch (Exception ex) {
-                System.out.println("Khong phai so. Moi nhap lai:");
+                println("Khong phai so. Moi nhap lai:");
             }
         }
         return num;
@@ -200,7 +208,7 @@ public class UngDungQuanLyKhachHang {
         Scanner sc = new Scanner(System.in);
         input = input.trim();
         while (input.equals("")) {
-            System.out.println("Khong duoc bo trong. Nhap lai:");
+            println("Khong duoc bo trong. Nhap lai:");
             input = sc.nextLine();
             input = chuanHoa(input);
         }
