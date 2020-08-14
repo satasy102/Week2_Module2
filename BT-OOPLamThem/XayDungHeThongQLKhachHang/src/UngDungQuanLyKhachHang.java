@@ -3,6 +3,8 @@ import java.util.Scanner;
 
 public class UngDungQuanLyKhachHang {
 
+    public static final String DAU_CHIA_DONG = "==========================================";
+
     public static void main(String[] args) {
 
         ArrayList<KhachHang> mangKhachHang = new ArrayList<>();
@@ -86,16 +88,14 @@ public class UngDungQuanLyKhachHang {
             mangKhachHang.add(khachHang);
             System.out.printf("Ban vua them moi khach hang %s thanh cong \n", khachHang.getTenKH());
         }
-        System.out.println("Chon menu de thuc hien tiep");
-        System.out.println("==========================================");
+        phanDay();
 
     }
 
     public  static void thongTinKhachHang(ArrayList<KhachHang> mangKhachHang,int index){
-        System.out.printf("Khach hang %s, Dia chi: %s, Email: %s, SDT: %s, Gioi tinh: %s, So don hang da mua: %d\n",
-                mangKhachHang.get(index).getTenKH(), mangKhachHang.get(index).getDiaChi(),
-                mangKhachHang.get(index).getEmail(), mangKhachHang.get(index).getSoDienThoai(),
-                gioiTinh(mangKhachHang,index),mangKhachHang.get(index).getSoDonHangDaMua());
+        System.out.printf("%s, Gioi tinh: %s, So don hang da mua: %d\n",
+                mangKhachHang.get(index).toString(), gioiTinh(mangKhachHang,index),
+                mangKhachHang.get(index).getSoDonHangDaMua());
     }
 
     public static void timKiemKhachHang(ArrayList<KhachHang> mangKhachHang) {
@@ -118,8 +118,7 @@ public class UngDungQuanLyKhachHang {
         if(check){
             thongTinKhachHang(mangKhachHang,index);
         } else System.out.println("Khong ton tai KH");
-        System.out.println("Chon menu de thuc hien tiep");
-        System.out.println("==========================================");
+        phanDay();
 
     }
 
@@ -144,20 +143,23 @@ public class UngDungQuanLyKhachHang {
         if(check){
             thongTinKhachHang(mangKhachHang,index);
         } else System.out.println("Khong ton tai KH");
-        System.out.println("Chon menu de thuc hien tiep");
-        System.out.println("==========================================");
+        phanDay();
 
+    }
+
+    public static void phanDay() {
+        System.out.println("Chon menu de thuc hien tiep");
+        System.out.println(DAU_CHIA_DONG);
     }
 
     public static void hienThiDanhSachKhachHang(ArrayList<KhachHang> mangKhachHang) {
         for (int i = 0; i < mangKhachHang.size(); i++) {
             System.out.print( (i+1)+". ");
             thongTinKhachHang(mangKhachHang,i);
-            System.out.println("==================");
+            System.out.println();
         }
         System.out.printf("Tong co %d Khach hang trong he thong\n", mangKhachHang.size());
-        System.out.println("Chon menu de thuc hien tiep");
-        System.out.println("==========================================");
+        phanDay();
     }
 
     public static void tangSoDonHangChoKhach(ArrayList<KhachHang> mangKhachHang){
@@ -181,8 +183,7 @@ public class UngDungQuanLyKhachHang {
             mangKhachHang.get(index).setSoDonHangDaMua(mangKhachHang.get(index).getSoDonHangDaMua()+1);
             thongTinKhachHang(mangKhachHang,index);
         } else System.out.println("Khong ton tai KH");
-        System.out.println("Chon menu de thuc hien tiep");
-        System.out.println("==========================================");
+        phanDay();
     }
 
     public static String gioiTinh(ArrayList<KhachHang> mangKhachHang, int index){
