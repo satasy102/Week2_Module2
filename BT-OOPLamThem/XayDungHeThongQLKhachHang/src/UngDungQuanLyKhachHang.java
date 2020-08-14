@@ -49,15 +49,19 @@ public class UngDungQuanLyKhachHang {
         String tenKH = sc.nextLine();
         tenKH = chuanHoa(tenKH);
         tenKH = kiemTraChuoi(tenKH);
+
         System.out.println("Nhap dia chi KH:");
         String diaChi = sc.nextLine();
         diaChi = chuanHoa(diaChi);
+
         System.out.println("Nhap So Dien Thoai KH:");
         long soDienThoai = 0;
         soDienThoai = kiemTraSo(soDienThoai);
+
         System.out.println("Nhap Email KH:");
         String email = sc.nextLine();
         email = email.trim();
+
         System.out.println("Nhap gioi tinh KH:");
         String gender = sc.nextLine();
         gender= kiemTraChuoi(gender);
@@ -72,21 +76,29 @@ public class UngDungQuanLyKhachHang {
         boolean check = false;
         int index = 0;
         for (int i = 0; i < mangKhachHang.size(); i++) {
-            if (mangKhachHang.get(i).getSoDienThoai()==khachHang.getSoDienThoai() &&
-                    mangKhachHang.get(i).getEmail().equals(khachHang.getEmail())) {
+            long soDienThoaiCu = mangKhachHang.get(i).getSoDienThoai();
+            long soDienThoaiMoi = khachHang.getSoDienThoai();
+            String emailCu = mangKhachHang.get(i).getEmail();
+            String emailMoi = khachHang.getEmail();
+            if (soDienThoaiCu == soDienThoaiMoi && emailCu.equals(emailMoi)) {
                 check = true;
                 index = i;
                 break;
             }
         }
+
+        String tenKHMoi = khachHang.getTenKH();
+        String diaChiMoi = khachHang.getDiaChi();
+        boolean gioiTinhMoi = khachHang.getGioiTinh();
+
         if (check) {
-            mangKhachHang.get(index).setTenKH(khachHang.getTenKH());
-            mangKhachHang.get(index).setDiaChi(khachHang.getDiaChi());
-            mangKhachHang.get(index).setGioiTinh(khachHang.getGioiTinh());
+            mangKhachHang.get(index).setTenKH(tenKHMoi);
+            mangKhachHang.get(index).setDiaChi(diaChiMoi);
+            mangKhachHang.get(index).setGioiTinh(gioiTinhMoi);
             System.out.println("Khach hang da ton tai, He thong vua update thong tin");
         } else {
             mangKhachHang.add(khachHang);
-            System.out.printf("Ban vua them moi khach hang %s thanh cong \n", khachHang.getTenKH());
+            System.out.printf("Ban vua them moi khach hang %s thanh cong \n", tenKHMoi);
         }
         phanDay();
 
@@ -99,7 +111,6 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static void timKiemKhachHang(ArrayList<KhachHang> mangKhachHang) {
-        System.out.println("He thong dang tim kiem");
         int index = 0;
         boolean check = false;
 
@@ -124,32 +135,13 @@ public class UngDungQuanLyKhachHang {
 
     public static void inThongTinKhachHang(ArrayList<KhachHang> mangKhachHang) {
         System.out.println("Thong tin");
-
-        int index = 0;
-        boolean check = false;
-
-        System.out.println("Nhap sdt khach hang:");
-        long sdt = 0;
-        sdt= kiemTraSo(sdt);
-
-        for (int i = 0; i < mangKhachHang.size(); i++) {
-            if (mangKhachHang.get(i).getSoDienThoai()==sdt) {
-                check = true;
-                index=i;
-                break;
-            }
-        }
-
-        if(check){
-            thongTinKhachHang(mangKhachHang,index);
-        } else System.out.println("Khong ton tai KH");
-        phanDay();
-
+        timKiemKhachHang(mangKhachHang);
     }
 
     public static void hienThiDanhSachKhachHang(ArrayList<KhachHang> mangKhachHang) {
         for (int i = 0; i < mangKhachHang.size(); i++) {
-            System.out.print( (i+1)+". ");
+            int soThuTu = i + 1;
+            System.out.print( soThuTu +". ");
             thongTinKhachHang(mangKhachHang,i);
             System.out.println();
         }
@@ -201,7 +193,7 @@ public class UngDungQuanLyKhachHang {
         System.out.println("Chon menu de thuc hien tiep");
         System.out.println(DAU_CHIA_DONG);
     }
-    
+
     public static long kiemTraSo(long num) {
         Scanner sc = new Scanner(System.in);
         String str;
