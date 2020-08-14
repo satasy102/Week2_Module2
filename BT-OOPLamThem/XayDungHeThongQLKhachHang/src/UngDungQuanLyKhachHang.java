@@ -101,7 +101,6 @@ public class UngDungQuanLyKhachHang {
             System.out.printf("Ban vua them moi khach hang %s thanh cong \n", tenKHMoi);
         }
         phanDay();
-
     }
 
     public  static void thongTinKhachHang(ArrayList<KhachHang> mangKhachHang,int index){
@@ -130,7 +129,6 @@ public class UngDungQuanLyKhachHang {
             thongTinKhachHang(mangKhachHang,index);
         } else System.out.println("Khong ton tai KH");
         phanDay();
-
     }
 
     public static void inThongTinKhachHang(ArrayList<KhachHang> mangKhachHang) {

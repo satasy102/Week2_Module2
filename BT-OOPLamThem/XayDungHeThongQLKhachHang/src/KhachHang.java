@@ -67,7 +67,7 @@ public class KhachHang {
     public String toString() {
         return "Khach hang " + tenKH +
                 ", Dia Chi: " + diaChi+
-                ", SO Dien Thoai: " + soDienThoai +
+                ", So Dien Thoai: " + soDienThoai +
                 ", Email: " + email;
     }
 }
