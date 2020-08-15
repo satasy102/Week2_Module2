@@ -17,8 +17,9 @@ public class UngDungQuanLyGhiChu {
 
     public static void main(String[] args) {
         menu();
-        System.out.println("\nNhap lua chon cua ban");
+        println("\nNhap lua chon cua ban");
         String nhap = sc.nextLine();
+        nhap=nhap.toUpperCase();
         while (true) {
             switch (nhap) {
                 case "C" -> taoMoiGhiChu();
@@ -26,11 +27,16 @@ public class UngDungQuanLyGhiChu {
                 case "D" -> xoaGhiChu();
                 case "L" -> xemDanhSachGhiChu();
                 case "F" -> hienThiGhiChuCanTim();
-                default -> System.out.println("Ban da nhap sai Menu. Hay nhao lai.");
+                case "X" -> {
+                    println("He thong dang shutdown");
+                    System.exit(0);
+                }
+                default -> println("Ban da nhap sai Menu. Hay nhao lai.");
             }
             menu();
-            System.out.println("\nNhap lua chon cua ban");
+            println("\nNhap lua chon cua ban");
             nhap = sc.nextLine();
+            nhap=nhap.toUpperCase();
         }
     }
 
@@ -40,10 +46,10 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static void hienThiBaGhiChuGanNhat() {
-        System.out.println(" ");
+        println(" ");
         int size = mangGhiChu.size();
         if (size ==0) {
-            System.out.println("Hien tai chua co ghi chu nao");
+            println("Hien tai chua co ghi chu nao");
         } else if (size <= 3) {
             byte stt=0;
             for (GhiChu ghiChu : mangGhiChu) {
@@ -61,14 +67,17 @@ public class UngDungQuanLyGhiChu {
         }
     }
 
+    public static void println(String msg){
+        System.out.println(msg);
+    }
 
     public static void menu() {
-        System.out.println("MENU");
-        System.out.println("Tao Ghi Chu bam C");
-        System.out.println("Sua Ghi Chu bam U");
-        System.out.println("Xoa Ghi Chu bam D");
-        System.out.println("Xem Danh Sach bam L");
-        System.out.println("Xem Ghi Chu bam F");
+        println("MENU");
+        println("Tao Ghi Chu bam C");
+        println("Sua Ghi Chu bam U");
+        println("Xoa Ghi Chu bam D");
+        println("Xem Danh Sach bam L");
+        println("Xem Ghi Chu bam F");
         sort();
 
         hienThiBaGhiChuGanNhat();
@@ -80,14 +89,14 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static byte soTaskCanLam() {
-        System.out.println("Nhap so task can lam:");
-        byte task = 0;
-        task = kiemTraSo(task);
-        while (task > 20) {
-            System.out.println("Vuot qua so task quy dinh.Nhap lai: ");
-            task = sc.nextByte();
+        println("Nhap so task can lam:");
+        byte soTask = 0;
+        soTask = kiemTraSo(soTask);
+        while (soTask > 20 || soTask<=0) {
+            println("Sai so task quy dinh.Nhap lai: ");
+            soTask = kiemTraSo(soTask);
         }
-        return task;
+        return soTask;
     }
 
     public static String[] taskCongViec() {
@@ -95,7 +104,7 @@ public class UngDungQuanLyGhiChu {
         String[] congViec = new String[soTask];
         for (byte i = 0; i < soTask; i++) {
             int stt = i + 1;
-            System.out.println("Nhap cong viec Task thu " + stt + ":");
+            println("Nhap cong viec Task thu " + stt + ":");
             congViec[i] = sc.nextLine();
         }
 
@@ -103,40 +112,56 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static void phanDay() {
-        System.out.println(DAU_GACH_PHAN_DAY);
+        println(DAU_GACH_PHAN_DAY);
     }
 
     public static void taoMoiGhiChu() {
-        System.out.println("TAO MOI GHI CHU");
+        println("TAO MOI GHI CHU");
         if (GhiChu.soGhiChu >= 128) {
-            System.out.println("Da vuot qua gioi han cho phep de tao Ghi Chu moi.");
+            println("Da vuot qua gioi han cho phep de tao Ghi Chu moi.");
         } else {
             GhiChu ghiChu = new GhiChu();
             ghiChu.setThoiGianTao(thoiGian());
-            System.out.println("Nhap Tieu De:");
-            ghiChu.setTieuDe(sc.nextLine());
-            System.out.println("Nhap Noi Dung:");
+            println("Nhap Tieu De:");
+            String tieuDe=sc.nextLine();
+            tieuDe=kiemTraChuoi(tieuDe);
+            tieuDe=kiemTraTieuDe(tieuDe);
+            ghiChu.setTieuDe(tieuDe);
+            println("Nhap Noi Dung:");
             ghiChu.setNoiDung(sc.nextLine());
             ghiChu.setDanhSachViec(taskCongViec());
-            System.out.println("Ban da nhap ghi chu thanh cong");
+            println("Ban da nhap ghi chu thanh cong");
             ghiChu.setThoiGianChinhSuaLanCuoi(thoiGian());
             mangGhiChu.add(ghiChu);
         }
         phanDay();
     }
 
+    public static String kiemTraTieuDe(String tieuDe){
+        for (GhiChu ghiChu : mangGhiChu) {
+            String tieuDeGhiChu = ghiChu.getTieuDe();
+            if (tieuDeGhiChu.equals(tieuDe)) {
+                println("Da co Tieu de ten nay. Nhap lai ten khac.");
+                tieuDe = sc.nextLine();
+                tieuDe=kiemTraChuoi(tieuDe);
+                kiemTraTieuDe(tieuDe);
+                return tieuDe;
+            }
+        }
+        return tieuDe;
+    }
     public static void chinhSuaGhiChu() {
-        System.out.println("CHINH SUA GHI CHU");
-        System.out.println("Tim ghi chu can sua:");
+        println("CHINH SUA GHI CHU");
+        println("Tim ghi chu can sua:");
         boolean timTieuDe=timTieuDe();
         if (timTieuDe) {
             suaTrongMotGhiChu();
-        } else System.out.println("Khong tim thay Ghi chu");
+        } else println("Khong tim thay Ghi chu");
         phanDay();
     }
 
     public static boolean timTieuDe() {
-        System.out.println("Nhap tieu de Ghi Chu can tim:");
+        println("Nhap tieu de Ghi Chu can tim:");
         String tieuDeCanTim = sc.nextLine();
         tieuDeCanTim = tieuDeCanTim.toLowerCase();
 
@@ -156,7 +181,7 @@ public class UngDungQuanLyGhiChu {
 
     public static void suaTrongMotGhiChu() {
         mangGhiChu.get(index).hienThiGhiChu();//Hien thi ghi chu can sua
-        System.out.println("Ban muon sua phan nao? (Tieu de, Noi dung, Task, hoac K (Khong))");
+        println("Ban muon sua phan nao? (Tieu de, Noi dung, Task, hoac K (Khong))");
         String canSua = sc.nextLine();
         canSua = canSua.toLowerCase();
         if (!canSua.equals("k")) {
@@ -164,30 +189,30 @@ public class UngDungQuanLyGhiChu {
             if (canSua.equals(NOI_DUNG)) suaNoiDung();
             if (canSua.equals(TASK)) suaTask();
             tiepTucChinhSua();
-        } else System.out.println("Khong chinh sua gi");
+        } else println("Khong chinh sua gi");
     }
 
     public static void suaTieuDe() {
-        System.out.println("Tieu de Moi:");
+        println("Tieu de Moi:");
         mangGhiChu.get(index).setTieuDe(sc.nextLine());
         mangGhiChu.get(index).setThoiGianChinhSuaLanCuoi(thoiGian());
-        System.out.println("Sua tieu de thanh cong");
+        println("Sua tieu de thanh cong");
     }
 
     public static void suaNoiDung() {
-        System.out.println("Noi dung Moi:");
+        println("Noi dung Moi:");
         mangGhiChu.get(index).setNoiDung(sc.nextLine());
         mangGhiChu.get(index).setThoiGianChinhSuaLanCuoi(thoiGian());
-        System.out.println("Sua Noi dung thanh cong");
+        println("Sua Noi dung thanh cong");
     }
 
     public static void suaTask() {
         mangGhiChu.get(index).hienThiDanhSachViec();
-        System.out.println("Nhap so thu tu task can sua");
+        println("Nhap so thu tu task can sua");
         byte stt = 0;
         stt = kiemTraSTTTask(stt);
         int indexTask = stt - 1;
-        System.out.println("Nhap noi dung can sua.");
+        println("Nhap noi dung can sua.");
         System.out.printf("Task thu %d:\n", stt);
         String ndTaskMoi = sc.nextLine();
 
@@ -203,7 +228,7 @@ public class UngDungQuanLyGhiChu {
             int length = mangGhiChu.get(index).danhSachViec.length;
 
             if (!(stt > length || stt < 0)) break;
-            System.out.println("Sai so thu tu. Nhap lai: ");
+            println("Sai so thu tu. Nhap lai: ");
             stt = kiemTraSo(stt);
         }
 
@@ -211,16 +236,16 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static void tiepTucSuaTask() {
-        System.out.println("Sua Task thanh cong");
+        println("Sua Task thanh cong");
         String traLoi = cauHoiCoKhong();
 
         if (traLoi.equals(CO)) {
             suaTask();
-        } else System.out.println("Chinh sua Task hoan tat.");
+        } else println("Chinh sua Task hoan tat.");
     }
 
     public static String cauHoiCoKhong() {
-        System.out.println("Ban muon sua tiep khong? Co(C)/Khong(K)");
+        println("Ban muon sua tiep khong? Co(C)/Khong(K)");
         String traLoi = sc.nextLine();
         traLoi = kiemTraCauTraLoi(traLoi);
 
@@ -231,33 +256,33 @@ public class UngDungQuanLyGhiChu {
         String canSua = cauHoiCoKhong();
         if (canSua.equals(CO)) {
             suaTrongMotGhiChu();
-        } else System.out.println("Chinh sua hoan tat.");
+        } else println("Chinh sua hoan tat.");
     }
 
     public static void xoaGhiChu() {
-        System.out.println("XOA GHI CHU");
+        println("XOA GHI CHU");
         boolean timTieuDe = timTieuDe();
         if (timTieuDe) {
-            System.out.println("Ghi chu can xoa la:");
+            println("Ghi chu can xoa la:");
             String tieuDe = mangGhiChu.get(index).getTieuDe();
             String noiDung = mangGhiChu.get(index).getNoiDung();
 
-            System.out.println(tieuDe);
+            println(tieuDe);
             System.out.printf("%-5s%s\n", " ", noiDung);
-            System.out.println("Ban co muon xoa khong? Co(C)/Khong(K)");
+            println("Ban co muon xoa khong? Co(C)/Khong(K)");
             String traloi = sc.nextLine();
             traloi = kiemTraCauTraLoi(traloi);
             if (traloi.equals(CO)) {
                 mangGhiChu.remove(index);
-                System.out.println("Da xoa thanh cong");
-            } else System.out.println("Huy xoa");
+                println("Da xoa thanh cong");
+            } else println("Huy xoa");
         }
     }
 
     public static String kiemTraCauTraLoi(String traloi) {
         traloi = traloi.toLowerCase();
         while (!traloi.equals(CO) && !traloi.equals(KHONG)) {
-            System.out.println("Nhap du lieu sai. Nhap lai.");
+            println("Nhap du lieu sai. Nhap lai.");
             traloi = sc.nextLine();
             traloi = traloi.toLowerCase();
         }
@@ -266,24 +291,24 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static void xemDanhSachGhiChu() {
-        System.out.println("DANH SACH GHI CHU");
+        println("DANH SACH GHI CHU");
         sort();
         if(mangGhiChu.size()!=0) {
             byte stt = 0;
             for (GhiChu ghiChu : mangGhiChu) {
                 stt++;
-                System.out.println(stt + ".");
+                println(stt + ".");
                 ghiChu.hienThiGhiChu();
-                System.out.println(DAU_GACH_CHIA_TASK);
+                println(DAU_GACH_CHIA_TASK);
             }
-        } else System.out.println("Chua co ghi chu nao");
+        } else println("Chua co ghi chu nao");
 
     }
 
     public static void hienThiGhiChuCanTim() {
         if (timTieuDe()) {
             mangGhiChu.get(index).hienThiGhiChu();
-        } else System.out.println("Khong tim thay");
+        } else println("Khong tim thay");
         phanDay();
     }
 
@@ -295,11 +320,28 @@ public class UngDungQuanLyGhiChu {
                 num = Byte.parseByte(str);
                 break;
             } catch (Exception ex) {
-                System.out.println("Khong phai dang so. Nhap lai:");
+                println("Khong phai dang so. Nhap lai:");
             }
         }
 
         return num;
+    }
+
+    public static String kiemTraChuoi(String input) {
+        Scanner sc = new Scanner(System.in);
+        input = input.trim();
+        while (input.equals("")) {
+            println("Khong duoc bo trong. Nhap lai:");
+            input = sc.nextLine();
+            input = chuanHoa(input);
+        }
+        return input;
+    }
+
+    public static String chuanHoa(String str) {
+        str = str.trim();
+        str = str.replaceAll("\\s+", " ");
+        return str;
     }
 
 }
