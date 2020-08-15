@@ -138,14 +138,13 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static String kiemTraTieuDe(String tieuDe){
-        for (GhiChu ghiChu : mangGhiChu) {
-            String tieuDeGhiChu = ghiChu.getTieuDe();
-            if (tieuDeGhiChu.equals(tieuDe)) {
+        for (byte i=0;i< mangGhiChu.size();i++) {
+            String tieuDeGhiChu = mangGhiChu.get(i).getTieuDe();
+            while (tieuDeGhiChu.equals(tieuDe)) {
                 println("Da co Tieu de ten nay. Nhap lai ten khac.");
                 tieuDe = sc.nextLine();
                 tieuDe=kiemTraChuoi(tieuDe);
-                kiemTraTieuDe(tieuDe);
-                return tieuDe;
+                i=0;
             }
         }
         return tieuDe;
