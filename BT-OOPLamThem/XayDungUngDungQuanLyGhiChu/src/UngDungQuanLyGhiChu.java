@@ -155,7 +155,7 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static void suaTrongMotGhiChu() {
-        hienThiGhiChuCanTim();
+        mangGhiChu.get(index).hienThiGhiChu();//Hien thi ghi chu can sua
         System.out.println("Ban muon sua phan nao? (Tieu de, Noi dung, Task, hoac K (Khong))");
         String canSua = sc.nextLine();
         canSua = canSua.toLowerCase();
