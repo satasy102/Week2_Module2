@@ -48,14 +48,14 @@ public class UngDungQuanLyGhiChu {
             byte stt=0;
             for (GhiChu ghiChu : mangGhiChu) {
                 stt++;
-                System.out.printf("   %d %s\n",stt,ghiChu.getTieuDe());
+                System.out.printf("   %d. %s\n",stt,ghiChu.getTieuDe());
                 System.out.printf("      %s\n",ghiChu.getNoiDung());
             }
         }else {
             byte stt=0;
             for (byte i=0; i<3;i++) {
                 stt++;
-                System.out.printf("   %d %s\n",stt,mangGhiChu.get(i).getTieuDe());
+                System.out.printf("   %d. %s\n",stt,mangGhiChu.get(i).getTieuDe());
                 System.out.printf("      %s\n",mangGhiChu.get(i).getNoiDung());
             }
         }
@@ -91,11 +91,11 @@ public class UngDungQuanLyGhiChu {
     }
 
     public static String[] taskCongViec() {
-        byte task = soTaskCanLam();
-        String[] congViec = new String[task];
-        for (byte i = 0; i < task; i++) {
+        byte soTask = soTaskCanLam();
+        String[] congViec = new String[soTask];
+        for (byte i = 0; i < soTask; i++) {
             int stt = i + 1;
-            System.out.println("Nhap cong viec task thu " + stt + ":");
+            System.out.println("Nhap cong viec Task thu " + stt + ":");
             congViec[i] = sc.nextLine();
         }
 
@@ -128,8 +128,10 @@ public class UngDungQuanLyGhiChu {
     public static void chinhSuaGhiChu() {
         System.out.println("CHINH SUA GHI CHU");
         System.out.println("Tim ghi chu can sua:");
-        if (timTieuDe()) suaTrongMotGhiChu();
-        else System.out.println("Khong tim thay Ghi chu");
+        boolean timTieuDe=timTieuDe();
+        if (timTieuDe) {
+            suaTrongMotGhiChu();
+        } else System.out.println("Khong tim thay Ghi chu");
         phanDay();
     }
 
@@ -234,7 +236,8 @@ public class UngDungQuanLyGhiChu {
 
     public static void xoaGhiChu() {
         System.out.println("XOA GHI CHU");
-        if (timTieuDe()) {
+        boolean timTieuDe = timTieuDe();
+        if (timTieuDe) {
             System.out.println("Ghi chu can xoa la:");
             String tieuDe = mangGhiChu.get(index).getTieuDe();
             String noiDung = mangGhiChu.get(index).getNoiDung();
@@ -265,13 +268,15 @@ public class UngDungQuanLyGhiChu {
     public static void xemDanhSachGhiChu() {
         System.out.println("DANH SACH GHI CHU");
         sort();
-        byte stt = 0;
-        for (GhiChu ghiChu : mangGhiChu) {
-            stt++;
-            System.out.println(stt + " ");
-            ghiChu.hienThiGhiChu();
-            System.out.println(DAU_GACH_CHIA_TASK);
-        }
+        if(mangGhiChu.size()!=0) {
+            byte stt = 0;
+            for (GhiChu ghiChu : mangGhiChu) {
+                stt++;
+                System.out.println(stt + ".");
+                ghiChu.hienThiGhiChu();
+                System.out.println(DAU_GACH_CHIA_TASK);
+            }
+        } else System.out.println("Chua co ghi chu nao");
 
     }
 
