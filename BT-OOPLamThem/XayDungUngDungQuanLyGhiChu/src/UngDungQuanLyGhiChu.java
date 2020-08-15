@@ -144,7 +144,7 @@ public class UngDungQuanLyGhiChu {
                 println("Da co Tieu de ten nay. Nhap lai ten khac.");
                 tieuDe = sc.nextLine();
                 tieuDe=kiemTraChuoi(tieuDe);
-                i=0;
+                i= -1;//De vong lap for chay lai tu 0;
             }
         }
         return tieuDe;
