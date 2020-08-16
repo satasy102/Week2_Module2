@@ -1,0 +1,1 @@
+Simple JUnit example used at [CodeGym](https://codegym.vn) 
