@@ -12,7 +12,7 @@ public class NextDayCalculator {
                 else if (day==31){
                     day=1;
                     month+=1;
-                } else return "Ngay khong  dung";
+                } else return "Ngay khong dung";
                 break;
             }
             case 12: {
@@ -21,7 +21,7 @@ public class NextDayCalculator {
                     day=1;
                     month=1;
                     year+=1;
-                } else return "Ngay khong  dung";
+                } else return "Ngay khong dung";
                 break;
             }
             case 4:
@@ -32,7 +32,7 @@ public class NextDayCalculator {
                 else if(day==30){
                     day=1;
                     month+=1;
-                }else return "Ngay khong  dung";
+                }else return "Ngay khong dung";
                 break;
             }
             case 2: {
