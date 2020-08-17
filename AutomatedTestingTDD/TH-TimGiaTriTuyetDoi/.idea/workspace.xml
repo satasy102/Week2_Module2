@@ -20,13 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9d2eda5c-9533-4830-9338-13300c51a17a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TH-TimGiaTriTuyetDoi.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/AbsoluteNumberCalculator.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/AbsoluteNumberCalculatorTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../New folder/.idea/workspace.xml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +117,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1597628208835</updated>
-      <workItem from="1597628209901" duration="829000" />
+      <workItem from="1597628209901" duration="961000" />
     </task>
     <servers />
   </component>
@@ -142,22 +136,26 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1597629006473">
+    <state x="462" y="105" key="FileChooserDialogImpl" timestamp="1597629173188">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597629006473" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1597629006473">
+    <state x="462" y="105" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1597629173188" />
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1597629174694">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597629006473" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1597629006473">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1597629174694" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1597629174694">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597629006473" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1597629006473">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1597629174694" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1597629174694">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597629006473" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1597629174694" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1597629174694">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1597629174694" />
     <state x="388" y="255" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1597628342355">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
@@ -166,5 +164,9 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="454" y="170" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.0.1366.728@0.0.1366.728" timestamp="1597628345449" />
+    <state x="65" y="0" key="new project wizard" timestamp="1597629173801">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="65" y="0" key="new project wizard/0.0.1366.728@0.0.1366.728" timestamp="1597629173801" />
   </component>
 </project>
