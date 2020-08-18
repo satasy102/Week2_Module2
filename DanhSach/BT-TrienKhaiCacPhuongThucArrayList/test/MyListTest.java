@@ -33,11 +33,13 @@ class MyListTest {
         System.out.println(list.contains("Russia"));
 
         System.out.println("(10) list "+list);
+
         MyArrayList list1= (MyArrayList) list.clone();
-        System.out.println(list1);
+        System.out.println("(11) list clone "+list1);
 
         list.clear();
 
+        System.out.println("(12) Clear list:");
         for (int i=0; i< list.size();i++) {
             System.out.print(list.get(i) + " ");
         }
