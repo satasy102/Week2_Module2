@@ -2,7 +2,7 @@ public class MyArrayList<E> {
     private static final int DEFAULT_CAPACITY = 10;
     private static final Object[] EMPTY_ELEMENTDATA = {};
     private int size = 0;
-    Object[] elements= (E[]) new Object[DEFAULT_CAPACITY];
+    Object[] elements= new Object[DEFAULT_CAPACITY];
 
     MyArrayList() {}
 
@@ -21,7 +21,7 @@ public class MyArrayList<E> {
         if(index==elements.length) {
             ensureCapacity(size);
         }
-        for (int i = size - 1; i >= index; i--) elements[i + 1] = elements[i];
+        if (size - index >= 0) System.arraycopy(elements, index, elements, index + 1, size - index);
 
         elements[index] = e;
         size++;
@@ -33,9 +33,7 @@ public class MyArrayList<E> {
 
         E e = (E) elements[index];
 
-        for (int i = index; i < size - 1; i++) {
-            elements[i] = elements[i + 1];
-        }
+        if (size - 1 - index >= 0) System.arraycopy(elements, index + 1, elements, index, size - 1 - index);
 
         elements[elements.length - 1] = null;
 
@@ -85,7 +83,7 @@ public class MyArrayList<E> {
     }
 
     public void clear() {
-        elements = (E[]) new Object[DEFAULT_CAPACITY];
+        elements = new Object[DEFAULT_CAPACITY];
         size = 0;
     }
 
