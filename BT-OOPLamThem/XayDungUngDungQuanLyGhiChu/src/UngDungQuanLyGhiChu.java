@@ -31,7 +31,11 @@ public class UngDungQuanLyGhiChu {
                     println("He thong dang shutdown");
                     System.exit(0);
                 }
-                default -> println("Ban da nhap sai Menu. Hay nhao lai.");
+                default -> {
+                    println("Ban da nhap sai Menu. Hay nhap lai.");
+                    nhap= sc.nextLine();
+                    nhap=nhap.toUpperCase();
+                }
             }
             menu();
             println("\nNhap lua chon cua ban");
