@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class UngDungQuanLyKhachHang {
@@ -10,10 +10,18 @@ public class UngDungQuanLyKhachHang {
     public static final String IN_TOAN_BO_DANH_SACH_KHACH_HANG = "Bam 4 de in toan bo danh sach khach hang";
     public static final String TANG_SO_DON_HANG_CHO_KHACH = "Bam 5 de tang so don hang cho khach";
     public static final String THOAT = "Bam 0 de thoat";
-    private static final ArrayList<KhachHang> mangKhachHang = new ArrayList<>();
-    private static final Scanner sc=new Scanner(System.in);
     public static final String KHONG_TON_TAI_KH = "Khong ton tai KH";
-    private static int index;
+    private static final HashMap<Long, KhachHang> mangKhachHang = new HashMap<>();
+    private static final Scanner sc = new Scanner(System.in);
+    public static long id = 0;
+    private static long max = 0;
+    private static long maxTen = 0;
+    private static long maxDiaChi = 0;
+    private static long maxSDT = 0;
+    private static long maxEmail = 0;
+    private static long soDauGachDuoi = 8 + 7 + 2 + 1 + 6 * 3 + maxTen + maxDiaChi + maxEmail + maxSDT + 9 + 11;
+    private static long index = 0;
+
 
     public static void main(String[] args) {
         println("Chao mung ban den voi he thong quan ly khach hang");
@@ -44,7 +52,7 @@ public class UngDungQuanLyKhachHang {
         System.out.println(msg);
     }
 
-    public static void print(String msg){
+    public static void print(String msg) {
         System.out.print(msg);
     }
 
@@ -68,7 +76,8 @@ public class UngDungQuanLyKhachHang {
         String diaChi = sc.nextLine();
 
         println("Nhap So Dien Thoai KH:");
-        String soDienThoai = sc.nextLine();
+        long soDienThoai = 0;
+        soDienThoai = kiemTraSo(soDienThoai);
 
         println("Nhap Email KH:");
         String email = sc.nextLine();
@@ -78,9 +87,9 @@ public class UngDungQuanLyKhachHang {
         gender = kiemTraChuoi(gender);
         boolean gioiTinh = chuyenGioiTinhSangBoolean(gender);
 
-        KhachHang khachHang= new KhachHang(tenKH, diaChi, soDienThoai, email, gioiTinh);
+        KhachHang khachHang = new KhachHang(tenKH, diaChi, soDienThoai, email, gioiTinh);
 
-        if(kiemTraSDTVaEmailTrungNhau(soDienThoai,email)){
+        if (kiemTraSDTVaEmailTrungNhau(soDienThoai, email)) {
 
             mangKhachHang.get(index).setTenKH(tenKH);
             mangKhachHang.get(index).setDiaChi(diaChi);
@@ -88,53 +97,163 @@ public class UngDungQuanLyKhachHang {
             println("Khach hang nay da ton tai. He thong da cap nhat thong tin.");
 
         } else {
-            mangKhachHang.add(khachHang);
+            id++;
+            mangKhachHang.put(id, khachHang);
+            mangKhachHang.get(id).ID = id;
             System.out.printf("Ban vua them khach hang %s thanh cong.", tenKH);
+
         }
     }
 
-    public static boolean kiemTraSDTVaEmailTrungNhau(String soDienThoai, String email){
+    public static boolean kiemTraSDTVaEmailTrungNhau(long soDienThoai, String email) {
         int size = mangKhachHang.size();
 
-        for (int i = 0; i< size; i++) {
+        for (long i = 1; i <= size; i++) {
 
-            String soDienThoaiCu = mangKhachHang.get(i).getSoDienThoai();
+            long soDienThoaiCu = mangKhachHang.get(i).getSoDienThoai();
             String eMailCu = mangKhachHang.get(i).getEmail();
 
-            if(soDienThoaiCu.equals(soDienThoai) && eMailCu.equals(email)){
-                index=i;
-                return true;
-            }
-        } return false;
-    }
-
-    public static void thongTinKhachHang(int index) {
-        String thongTin = mangKhachHang.get(index).toString();
-        int soDonHangDaMua = mangKhachHang.get(index).getSoDonHangDaMua();
-        System.out.printf("%s, Gioi tinh: %s, So don hang da mua: %d\n",
-                thongTin, gioiTinh(index), soDonHangDaMua);
-    }
-
-    public static boolean timKiemSDT(){
-        println("Nhap sdt khach hang:");
-        String sdtNhap = sc.nextLine();
-
-        int size = mangKhachHang.size();
-        for (int i = 0; i < size; i++) {
-            String soDienThoai = mangKhachHang.get(i).getSoDienThoai();
-
-            if (soDienThoai.equals(sdtNhap)) {
+            if (soDienThoaiCu == soDienThoai && eMailCu.equals(email)) {
                 index = i;
                 return true;
             }
-        } return false;
+        }
+        return false;
+    }
+
+    public static void thongTinKhachHang(long index) {
+
+        maxTen=maxTen();
+
+        maxDiaChi=maxDiaChi();
+
+        maxSDT=maxSDT();
+
+        maxEmail=maxEmail();
+
+        soDauGachDuoi = 8 + 7 + 2 + 1 + 6 * 3 + maxTen + maxDiaChi + maxEmail + maxSDT + 9 + 11;
+
+        thongTinKHCanTim(index);
+
+    }
+
+    public static long maxSDT() {
+        max = 0;
+        max = soKyTuLonNhat("SDT");
+        maxSDT = 0;
+        int size = mangKhachHang.size();
+        for (long i = 1; i <= size; i++) {
+            long soDienThoai = mangKhachHang.get(i).getSoDienThoai();
+            maxSDT = soKyTuLonNhat(String.valueOf(soDienThoai));
+        }
+        return maxSDT;
+    }
+
+    public static long maxTen() {
+        max = 0;
+        max = soKyTuLonNhat("Ten");
+        maxTen = 0;
+        int size = mangKhachHang.size();
+        for (long i = 1; i <= size; i++) {
+            String tenKH = mangKhachHang.get(i).getTenKH();
+            maxTen = soKyTuLonNhat(tenKH);
+        }
+        return maxTen;
+    }
+
+    public static long maxEmail() {
+        max = 0;
+        max = soKyTuLonNhat("Email");
+        maxEmail = 0;
+        int size = mangKhachHang.size();
+        for (long i = 1; i <= size; i++) {
+            String email = mangKhachHang.get(i).getEmail();
+            maxEmail = soKyTuLonNhat(email);
+        }
+        return maxEmail;
+    }
+
+    public static long maxDiaChi() {
+        max = 0;
+        max = soKyTuLonNhat("Dia Chi");
+        maxDiaChi = 0;
+        int size = mangKhachHang.size();
+        for (long i = 1; i <= size; i++) {
+            String diaChi = mangKhachHang.get(i).getDiaChi();
+            maxDiaChi = soKyTuLonNhat(diaChi);
+        }
+        return maxDiaChi;
+    }
+
+    public static boolean timKiemId() {
+        println("Nhap id khach hang:");
+        long id = 0;
+        id = kiemTraSo(id);
+        if (mangKhachHang.containsKey(id)) {
+            index = id;
+            return true;
+        } else return false;
     }
 
     public static void timKiemKhachHang() {
-        if (timKiemSDT()) {
-            thongTinKhachHang(index);
+        if (timKiemId()) {
+            bang1KhachHang();
+
         } else println(KHONG_TON_TAI_KH);
         phanDay();
+    }
+
+    public static void bang1KhachHang() {
+        max = 0;
+        max = soKyTuLonNhat("Ten");
+        String tenKH = mangKhachHang.get(index).getTenKH();
+        maxTen = soKyTuLonNhat(tenKH);
+
+        max = 0;
+        max = soKyTuLonNhat("Dia Chi");
+        String diaChi = mangKhachHang.get(index).getDiaChi();
+        maxDiaChi = soKyTuLonNhat(diaChi);
+
+        max = 0;
+        max = soKyTuLonNhat("SDT");
+        long soDienThoai = mangKhachHang.get(index).getSoDienThoai();
+        maxSDT = soKyTuLonNhat(String.valueOf(soDienThoai));
+
+        max = 0;
+        max = soKyTuLonNhat("Email");
+        String email = mangKhachHang.get(index).getEmail();
+        maxEmail = soKyTuLonNhat(email);
+
+        soDauGachDuoi = 8 + 7 + 2 + 1 + 6 * 3 + maxTen + maxDiaChi + maxEmail + maxSDT + 9 + 11;
+        phanTieuDeBang();
+
+        thongTinKHCanTim();
+    }
+
+    public static void thongTinKHCanTim() {
+        System.out.printf("\n%-2s%-3d%-2s%" + -(maxTen + 3) + "s%-2s%" +
+                        -(maxDiaChi + 3) + "s%-2s%" + -(maxSDT + 3) + "d%-2s%" +
+                        -(maxEmail + 3) + "s%-2s%-12s%-2s%-14s%s",
+                "|", mangKhachHang.get(index).getID(),
+                "|", mangKhachHang.get(index).getTenKH(),
+                "|", mangKhachHang.get(index).getDiaChi(),
+                "|", mangKhachHang.get(index).getSoDienThoai(),
+                "|", mangKhachHang.get(index).getEmail(),
+                "|", gioiTinh(index),
+                "|", mangKhachHang.get(index).getSoDonHangDaMua(), "|\n");
+    }
+
+    public static void thongTinKHCanTim(long index) {
+        System.out.printf("\n%-2s%-3d%-2s%" + -(maxTen + 3) + "s%-2s%" +
+                        -(maxDiaChi + 3) + "s%-2s%" + -(maxSDT + 3) + "d%-2s%" +
+                        -(maxEmail + 3) + "s%-2s%-12s%-2s%-14s%s",
+                "|", mangKhachHang.get(index).getID(),
+                "|", mangKhachHang.get(index).getTenKH(),
+                "|", mangKhachHang.get(index).getDiaChi(),
+                "|", mangKhachHang.get(index).getSoDienThoai(),
+                "|", mangKhachHang.get(index).getEmail(),
+                "|", gioiTinh(index),
+                "|", mangKhachHang.get(index).getSoDonHangDaMua(), "|");
     }
 
     public static void inThongTinKhachHang() {
@@ -145,29 +264,54 @@ public class UngDungQuanLyKhachHang {
     public static void hienThiDanhSachKhachHang() {
         int size = mangKhachHang.size();
 
-        for (int i = 0; i < size; i++) {
-            int soThuTu = i + 1;
-            print(soThuTu + ". ");
+        maxTen=maxTen();
+
+        maxDiaChi=maxDiaChi();
+
+        maxSDT=maxSDT();
+
+        maxEmail=maxEmail();
+
+        soDauGachDuoi = 8 + 7 + 2 + 1 + 6 * 3 + maxTen + maxDiaChi + maxEmail + maxSDT + 9 + 11;
+
+        phanTieuDeBang();
+
+        for (long i = 1; i <= size; i++) {
             thongTinKhachHang(i);
-            println(" ");
         }
-        System.out.printf("Tong co %d Khach hang trong he thong\n", size);
+        System.out.printf("\nTong co %d Khach hang trong he thong\n", size);
         phanDay();
+    }
+
+    public static void phanTieuDeBang() {
+        for (int i = 1; i <= soDauGachDuoi; i++) print("-");
+
+        System.out.printf("\n%-2s%-3s%-2s%" + -(maxTen + 3) +
+                        "s%-2s%" + -(maxDiaChi + 3) +
+                        "s%-2s%" + -(maxSDT + 3) + "s%-2s%" +
+                        -(maxEmail + 3) +
+                        "s%-2s%-12s%-2s%-14s%s",
+                "|", "ID", "|", "Ten", "|", "Dia chi", "|", "SDT", "|", "Email", "|", "Gioi tinh", "|",
+                "So don hang", "|\n");
+
+        for (int i = 1; i <= soDauGachDuoi; i++) System.out.print("-");
     }
 
     public static void tangSoDonHangChoKhach() {
-       if (timKiemSDT()) {
-           println("Thong tin sau khi tang 1 don hang");
+        if (timKiemId()) {
+            println("Thong tin sau khi tang 1 don hang");
 
-           int soDonHangDaMua = mangKhachHang.get(index).getSoDonHangDaMua();
-           mangKhachHang.get(index).setSoDonHangDaMua(soDonHangDaMua + 1);
+            int soDonHangDaMua = mangKhachHang.get(index).getSoDonHangDaMua();
+            mangKhachHang.get(index).setSoDonHangDaMua(soDonHangDaMua + 1);
 
-           thongTinKhachHang(index);
-        } else println(KHONG_TON_TAI_KH);
-        phanDay();
+            bang1KhachHang();
+        } else {
+            println(KHONG_TON_TAI_KH);
+            phanDay();
+        }
     }
 
-    public static String gioiTinh(int index) {
+    public static String gioiTinh(long index) {
         boolean gioiTinh = mangKhachHang.get(index).getGioiTinh();
         if (gioiTinh) return "Nam";
         return "Nu";
@@ -185,8 +329,16 @@ public class UngDungQuanLyKhachHang {
     }
 
     public static void phanDay() {
-        println("Chon menu de thuc hien tiep");
+        println("\nChon menu de thuc hien tiep");
         println(DAU_CHIA_DONG);
+    }
+
+    public static long soKyTuLonNhat(String str) {
+        char[] charArray = str.toCharArray();
+
+        if (max < charArray.length)
+            max = charArray.length;
+        return max;
     }
 
     public static long kiemTraSo(long num) {

@@ -1,19 +1,28 @@
 public class KhachHang {
     private String tenKH;
     private String diaChi;
-    private String soDienThoai;
+    private long soDienThoai;
     private String email;
     private boolean gioiTinh;
     private int soDonHangDaMua;
+    public long ID=0;
 
-    public KhachHang(){}
+    public KhachHang() {}
 
-    public KhachHang(String tenKH, String diaChi, String soDienThoai, String email, boolean gioiTinh) {
+    public KhachHang(String tenKH, String diaChi, long soDienThoai, String email, boolean gioiTinh) {
         this.tenKH = tenKH;
         this.diaChi = diaChi;
         this.soDienThoai = soDienThoai;
         this.email = email;
         this.gioiTinh = gioiTinh;
+    }
+
+    public long getID() {
+        return ID;
+    }
+
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public String getTenKH() {
@@ -32,11 +41,11 @@ public class KhachHang {
         this.diaChi = diaChi;
     }
 
-    public String getSoDienThoai() {
+    public long getSoDienThoai() {
         return soDienThoai;
     }
 
-    public void setSoDienThoai(String soDienThoai) {
+    public void setSoDienThoai(long soDienThoai) {
         this.soDienThoai = soDienThoai;
     }
 
@@ -58,18 +67,9 @@ public class KhachHang {
 
     public int getSoDonHangDaMua() {
         return soDonHangDaMua;
-
     }
 
     public void setSoDonHangDaMua(int soDonHangDaMua) {
         this.soDonHangDaMua = soDonHangDaMua;
-    }
-
-    @Override
-    public String toString() {
-        return "Khach hang " + tenKH +
-                ", Dia Chi: " + diaChi+
-                ", So Dien Thoai: " + soDienThoai +
-                ", Email: " + email;
     }
 }
